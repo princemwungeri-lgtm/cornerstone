@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import emailjs from "@emailjs/browser";
 import { AnimatePresence, motion } from "framer-motion";
+import ProjectsPage from "./Projects.jsx";
 import heroImage from "./images/heroImage.jpeg";
 import logoImage from "./images/Logo.png";
 import resourceImage from "./images/image.jpeg";
@@ -21,6 +22,7 @@ import {
   BookOpen,
   Briefcase,
   Building2,
+  Download,
   Globe2,
   GraduationCap,
   HandCoins,
@@ -40,8 +42,10 @@ import {
 const navItems = [
   ["Home", "#home"],
   ["About", "#about"],
+  ["Our Team", "#team"],
   ["Vision & Mission", "#vision"],
   ["Programmes", "#programmes"],
+  ["Projects", "/projects"],
   ["Impact", "#impact"],
   ["Governance", "#governance"],
   ["Support", "#get-involved"],
@@ -61,6 +65,82 @@ const values = [
   { icon: ShieldCheck, title: "Protection", text: "Support that promotes well-being, responsible choices and healthy relationships." },
   { icon: GraduationCap, title: "Growth", text: "Education, skills, leadership and entrepreneurship designed for long-term empowerment." },
 ];
+
+const teamPortraits = Object.entries(
+  import.meta.glob("./staff/*.{jpg,jpeg,png,webp}", {
+    eager: true,
+    import: "default",
+    query: "?url",
+  })
+)
+  .sort(([firstPath], [secondPath]) => firstPath.localeCompare(secondPath))
+  .map(([path, src]) => ({
+    src,
+    fileName: path.split("/").pop(),
+  }));
+
+const staffProfiles = [
+    {
+    role: "Presidente & Representante Legale",
+    focus: "Olive UMURISA",
+    text: "Works closely with young people to build confidence, belonging and everyday resilience.",
+  },
+  {
+    role: "Vice President",
+    focus: "patrick Nshimiyimana",
+    text: "Guides organisational direction, accountability and long-term impact across all programmes.",
+  },
+    {
+    role: "Treasurer",
+    focus: "Ingabire Esther",
+    text: "Ensures activities run smoothly and are shaped around the needs of the community.",
+  },
+  {
+    role: "Programmes Manager",
+    focus: "",
+    text: "Coordinates youth-focused initiatives and turns the organisation's mission into practical action.",
+  },
+  {
+    role: "Deputy Legal Representative",
+    focus: "Patrick Nshimiyimana",
+    text: "Leads vocational learning, including shoe making, employability and entrepreneurship pathways.",
+  },
+  {
+    role: "Communaute & Beneficiaires",
+    focus: "Claude Habimana",
+    text: "Helps ensure safe participation, responsible practice and a trusted environment for young people.",
+  },
+  {
+    role: "Communication / Porte-parole",
+    focus: "Aisha Muganga",
+    text: "Builds strong partnerships and supports the systems that keep projects organised and sustainable.",
+  },
+
+  {
+    role: "secretaire/Secretary",
+    focus: "Ingabire jean mourice",
+    text: "Supports programmes and helps create welcoming, safe spaces for participation and growth.",
+  },
+];
+
+const staffIcons = [Briefcase, Users, GraduationCap, ShieldCheck, Globe2, Heart, Sparkles, Target];
+
+const staffMembers = teamPortraits.map((portrait, index) => {
+  const profile = staffProfiles[index] ?? {
+    role: `Team Member ${String(index + 1).padStart(2, "0")}`,
+    focus: "Community engagement",
+    text: "Contributes to youth development, mentorship and inclusive participation across our programmes.",
+  };
+
+  return {
+    number: String(index + 1).padStart(2, "0"),
+    icon: staffIcons[index % staffIcons.length],
+    role: profile.role,
+    focus: profile.focus,
+    text: profile.text,
+    image: portrait.src,
+  };
+});
 
 const programmes = [
   {
@@ -131,6 +211,20 @@ const galleryImages = [
   { src: websiteImage, title: "Community outreach campaign", category: "Awareness & engagement" },
 ];
 
+const shoeImageModules = import.meta.glob("./immage/*.{jpg,jpeg,png,webp}", {
+  eager: true,
+  import: "default",
+  query: "?url",
+});
+
+const shoeMakingImages = Object.entries(shoeImageModules)
+  .sort(([firstPath], [secondPath]) => firstPath.localeCompare(secondPath))
+  .map(([path, src], index) => ({
+    src,
+    title: `Shoe making project ${String(index + 1).padStart(2, "0")}`,
+    fileName: path.split("/").pop(),
+  }));
+
 const learnMoreContent = {
   overview: {
     title: "About The Cornerstone",
@@ -161,6 +255,7 @@ const EMAILJS_PUBLIC_KEY = "uUCAKnDwkmiFGcxhD";
 function App() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [activeSlide, setActiveSlide] = useState(0);
+  const [showAllShoeImages, setShowAllShoeImages] = useState(false);
   const [formData, setFormData] = useState({
     full_name: "",
     email: "",
@@ -229,6 +324,10 @@ function App() {
 
     return () => clearInterval(intervalId);
   }, []);
+
+  if (window.location.pathname === "/projects") {
+    return <ProjectsPage />;
+  }
 
   return (
     <div className="min-h-screen bg-[#00a1de] text-slate-800">
@@ -299,18 +398,18 @@ function App() {
       )}
       <header className="sticky top-0 z-50 border-b border-white/20 bg-[#00a1de]/90 backdrop-blur-lg">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="flex h-20 items-center justify-between">
-            <a href="#home" className="flex items-center gap-3">
-              <div className="flex h-12 w-12 items-center justify-center overflow-hidden text-white">
+          <div className="flex min-h-20 items-center justify-between gap-4 py-3">
+            <a href="#home" className="flex min-w-0 items-center gap-3">
+              <div className="flex h-11 w-11 shrink-0 items-center justify-center overflow-hidden text-white sm:h-12 sm:w-12">
                 <img src={logoImage} alt="The Cornerstone logo" className="h-full w-full" />
               </div>
-              <div>
-                <p className="text-lg font-black tracking-[0.18em] text-white">THE CORNERSTONE</p>
-                <p className="text-[9px] uppercase tracking-[0.32em] text-blue-50">Education • Confidence • Change</p>
+              <div className="min-w-0">
+                <p className="truncate text-sm font-black tracking-[0.12em] text-white sm:text-lg sm:tracking-[0.18em]">THE CORNERSTONE</p>
+                <p className="hidden text-[9px] uppercase tracking-[0.32em] text-blue-50 sm:block">Education • Confidence • Change</p>
               </div>
             </a>
 
-            <nav className="hidden items-center gap-6 text-sm font-medium text-white lg:flex">
+            <nav className="hidden items-center gap-4 text-sm font-medium text-white xl:flex 2xl:gap-6">
               {navItems.map(([label, href]) => (
                 <a key={label} href={href} className="transition hover:text-[#fcd116]">
                   {label}
@@ -321,14 +420,14 @@ function App() {
             <div className="flex items-center gap-3">
               <a
                 href="#get-involved"
-                className="hidden rounded-full bg-[#fcd116] px-5 py-2.5 font-semibold text-[#0a3d8f] shadow-lg shadow-yellow-900/15 transition hover:bg-[#e7c00f] md:inline-flex items-center gap-2"
+                className="hidden items-center gap-2 rounded-full bg-[#fcd116] px-5 py-2.5 font-semibold text-[#0a3d8f] shadow-lg shadow-yellow-900/15 transition hover:bg-[#e7c00f] xl:inline-flex"
               >
                 Support Us
                 <ArrowRight size={16} />
               </a>
               <button
                 onClick={() => setMenuOpen(!menuOpen)}
-                className="rounded-full border border-slate-300 p-2 lg:hidden"
+                className="shrink-0 rounded-full border border-white/50 p-2 text-white xl:hidden"
                 aria-label="Toggle menu"
               >
                 {menuOpen ? <X size={22} /> : <Menu size={22} />}
@@ -338,7 +437,7 @@ function App() {
         </div>
 
         {menuOpen && (
-          <div className="border-t border-white/20 bg-[#00a1de] lg:hidden">
+          <div className="border-t border-white/20 bg-[#00a1de] xl:hidden">
             <div className="mx-auto max-w-7xl space-y-2 px-4 py-5">
               {navItems.map(([label, href]) => (
                 <a
@@ -463,6 +562,61 @@ function App() {
           </div>
         </section>
 
+        <section id="team" className="scroll-mt-20 bg-[#f8f4ee] py-20">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
+              <div className="max-w-3xl">
+                <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[#0a3d8f]">Our Team</p>
+                <h2 className="mt-4 text-3xl font-black text-[#0a3d8f] sm:text-4xl">Professionals turning purpose into measurable action.</h2>
+              </div>
+              <p className="max-w-md text-base leading-7 text-slate-600">A focused team structure brings leadership, programme quality, youth protection and strong partnerships together.</p>
+            </div>
+
+            <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+              {staffMembers.map(({ number, icon: Icon, role, focus, text, image }, index) => (
+                <motion.article
+                  key={`${role}-${number}`}
+                  initial={{ opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ duration: 0.45, delay: index * 0.08 }}
+                  className="group rounded-[1.5rem] border border-[#e2dcd2] bg-white p-5 shadow-[0_18px_50px_rgba(20,43,36,0.06)] transition hover:-translate-y-1 hover:border-[#8fc6f3]"
+                >
+                  <div className="overflow-hidden rounded-[1.1rem] border border-[#b7d9f7] bg-[#edf8ff]">
+                    {image ? (
+                      <img
+                        src={image}
+                        alt={role}
+                        className="aspect-[4/5] w-full object-cover object-center transition duration-300 group-hover:scale-[1.03]"
+                        style={{ objectPosition: "center top" }}
+                      />
+                    ) : (
+                      <div className="flex aspect-[4/5] items-center justify-center text-center">
+                        <div>
+                          <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-white text-[#0a3d8f] shadow-sm">
+                            <Users size={21} />
+                          </div>
+                          <p className="mt-3 text-[10px] font-bold uppercase tracking-[0.16em] text-[#0a3d8f]">Staff portrait</p>
+                          <p className="mt-1 text-xs text-slate-500">Image area</p>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                  <div className="flex items-center justify-between">
+                    <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#dff6ff] text-[#0a3d8f] transition group-hover:bg-[#fcd116]">
+                      <Icon size={22} />
+                    </div>
+                    <span className="text-xs font-black tracking-[0.2em] text-[#00a1de]">{number}</span>
+                  </div>
+                  <p className="mt-7 text-[10px] font-bold uppercase tracking-[0.16em] text-slate-500">{focus}</p>
+                  <h3 className="mt-2 text-xl font-black leading-tight text-[#0a3d8f]">{role}</h3>
+                  <p className="mt-4 text-sm leading-6 text-slate-600">{text}</p>
+                </motion.article>
+              ))}
+            </div>
+          </div>
+        </section>
+
         <section className="bg-[#edf8ff] py-20">
           <div className="mx-auto grid max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-[1.05fr_0.95fr] lg:items-center lg:px-8">
             <div className="overflow-hidden rounded-[2rem] border border-[#b7d9f7] bg-white shadow-[0_25px_80px_rgba(10,61,143,0.08)]">
@@ -560,10 +714,154 @@ function App() {
                         <span>{item}</span>
                       </li>
                     ))}
+                    {programme.title === "Skills & Enterprise" && (
+                      <li>
+                        <a href="/projects" className="mt-2 inline-flex items-center gap-2 font-semibold text-[#0a3d8f] transition hover:text-[#00a1de]">
+                          View project <ArrowRight size={16} />
+                        </a>
+                      </li>
+                    )}
                   </ul>
                 </div>
               </div>
             ))}
+          </div>
+
+          <motion.div
+            id="projects"
+            initial={{ opacity: 0, y: 36 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.2 }}
+            transition={{ duration: 0.65 }}
+            className="mt-12 overflow-hidden rounded-[2rem] border border-[#b7d9f7] bg-[#0a3d8f] text-white shadow-[0_30px_90px_rgba(10,61,143,0.2)]"
+          >
+            <div className="grid lg:grid-cols-[0.9fr_1.1fr] lg:items-stretch">
+              <div className="relative min-h-[360px] overflow-hidden">
+                <img
+                  src={shoeMakingImages[0]?.src}
+                  alt="Young people learning shoe making skills"
+                  className="absolute inset-0 h-full w-full object-cover"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#062b68] via-[#0a3d8f]/20 to-transparent" />
+                <div className="absolute bottom-0 left-0 p-7 sm:p-10">
+                  <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[#fcd116]">Skills & Enterprise</p>
+                  <p className="mt-3 text-2xl font-black">Learning a craft. Building a livelihood.</p>
+                </div>
+              </div>
+
+              <div className="p-7 sm:p-10">
+                <div className="flex flex-wrap items-start justify-between gap-4">
+                  <div>
+                    <p className="text-sm font-semibold uppercase tracking-[0.22em] text-blue-100">Featured project</p>
+                    <h2 className="mt-3 text-3xl font-black sm:text-4xl">Shoe Making Project</h2>
+                  </div>
+                  <div className="rounded-full border border-white/15 bg-white/10 px-4 py-2 text-sm font-semibold text-blue-50">
+                    {shoeMakingImages.length} project photos
+                  </div>
+                </div>
+                <p className="mt-6 max-w-2xl text-lg leading-8 text-slate-200">
+                  Follow the journey from practical training to handmade footwear. Participants learn how to turn raw materials into durable products while developing the discipline, precision and business confidence needed for economic independence.
+                </p>
+                <div className="mt-8 flex flex-wrap gap-3 text-sm text-blue-50">
+                  <span className="rounded-full border border-white/15 bg-white/10 px-4 py-2">Practical training</span>
+                  <span className="rounded-full border border-white/15 bg-white/10 px-4 py-2">Youth enterprise</span>
+                  <span className="rounded-full border border-white/15 bg-white/10 px-4 py-2">Handmade footwear</span>
+                </div>
+                <div className="mt-8 grid gap-4 border-t border-white/15 pt-7 sm:grid-cols-3">
+                  <div>
+                    <p className="text-xs uppercase tracking-[0.18em] text-blue-200">Focus</p>
+                    <p className="mt-2 font-bold">Footwear production</p>
+                  </div>
+                  <div>
+                    <p className="text-xs uppercase tracking-[0.18em] text-blue-200">Method</p>
+                    <p className="mt-2 font-bold">Hands-on learning</p>
+                  </div>
+                  <div>
+                    <p className="text-xs uppercase tracking-[0.18em] text-blue-200">Outcome</p>
+                    <p className="mt-2 font-bold">Enterprise readiness</p>
+                  </div>
+                </div>
+                <a
+                  href="/projects"
+                  className="mt-9 inline-flex items-center gap-2 rounded-full bg-[#fcd116] px-6 py-3 font-semibold text-[#0a3d8f] shadow-lg shadow-yellow-900/20 transition hover:bg-[#e7c00f]"
+                >
+                  Explore the project <ArrowRight size={16} />
+                </a>
+              </div>
+            </div>
+          </motion.div>
+        </section>
+
+        {/* <section id="shoe-gallery" className="scroll-mt-20 bg-[#f1f8fc] py-20">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
+              <div className="max-w-3xl">
+                <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[#0a3d8f]">Project gallery</p>
+                <h2 className="mt-4 text-3xl font-black text-[#0a3d8f] sm:text-4xl">See the craft, then take a closer look.</h2>
+                <p className="mt-4 text-lg leading-8 text-slate-600">Browse all {shoeMakingImages.length} moments from the shoe-making project. Every photo is available to download.</p>
+              </div>
+              <p className="text-sm font-semibold text-slate-500">Click the download icon on any photo</p>
+            </div>
+
+            <div className="mt-10 grid gap-4 md:grid-cols-3">
+              {[
+                { number: "01", title: "Material selection", text: "Understanding leather, linings, soles, adhesives and the quality checks behind a reliable finished product." },
+                { number: "02", title: "Pattern to assembly", text: "Moving from measurements and cutting to stitching, shaping, sole attachment and careful finishing." },
+                { number: "03", title: "Craft to enterprise", text: "Building consistency, costing, customer awareness and the confidence to develop a small footwear business." },
+              ].map((stage) => (
+                <div key={stage.number} className="rounded-[1.5rem] border border-[#cfe3ee] bg-white p-6 shadow-sm">
+                  <p className="text-sm font-black tracking-[0.2em] text-[#00a1de]">{stage.number}</p>
+                  <h3 className="mt-4 text-xl font-black text-[#0a3d8f]">{stage.title}</h3>
+                  <p className="mt-3 text-sm leading-7 text-slate-600">{stage.text}</p>
+                </div>
+              ))}
+            </div>
+
+            <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+              {shoeMakingImages.slice(0, showAllShoeImages ? shoeMakingImages.length : 12).map((image, index) => (
+                <motion.article
+                  key={image.fileName}
+                  initial={{ opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.12 }}
+                  transition={{ duration: 0.45, delay: (index % 4) * 0.06 }}
+                  className="group overflow-hidden rounded-[1.5rem] border border-[#d5e6f0] bg-white shadow-[0_18px_50px_rgba(10,61,143,0.08)]"
+                >
+                  <div className="relative aspect-[4/3] overflow-hidden bg-slate-100">
+                    <img
+                      src={image.src}
+                      alt={image.title}
+                      loading="lazy"
+                      className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
+                    />
+                    <a
+                      href={image.src}
+                      download={image.fileName}
+                      aria-label={`Download ${image.title}`}
+                      className="absolute right-3 top-3 flex h-10 w-10 items-center justify-center rounded-full bg-white/90 text-[#0a3d8f] shadow-lg backdrop-blur-sm transition hover:bg-[#fcd116]"
+                    >
+                      <Download size={18} />
+                    </a>
+                  </div>
+                  <div className="flex items-center justify-between gap-3 p-4">
+                    <p className="text-sm font-bold text-[#0a3d8f]">{image.title}</p>
+                    <span className="text-xs text-slate-400">JPG</span>
+                  </div>
+                </motion.article>
+              ))}
+            </div>
+
+            {shoeMakingImages.length > 12 && (
+              <button
+                type="button"
+                onClick={() => setShowAllShoeImages((current) => !current)}
+                className="mx-auto mt-10 flex items-center gap-2 rounded-full border-2 border-[#0a3d8f] px-6 py-3 font-semibold text-[#0a3d8f] transition hover:bg-[#0a3d8f] hover:text-white"
+              >
+                {showAllShoeImages ? "Show fewer photos" : `View all ${shoeMakingImages.length} photos`}
+                <ArrowRight size={16} />
+              </button>
+            )}
           </div>
         </section>
 
@@ -590,7 +888,7 @@ function App() {
               </div>
             </div>
           </div>
-        </section>
+        </section> */}
 
         <section id="governance" className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
           <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
