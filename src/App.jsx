@@ -80,7 +80,7 @@ const teamPortraits = Object.entries(
   }));
 
 const staffProfiles = [
-    {
+  {
     role: "Presidente & Representante Legale",
     focus: "Olive UMURISA",
     text: "Works closely with young people to build confidence, belonging and everyday resilience.",
@@ -90,36 +90,40 @@ const staffProfiles = [
     focus: "patrick Nshimiyimana",
     text: "Guides organisational direction, accountability and long-term impact across all programmes.",
   },
-    {
-    role: "Treasurer",
-    focus: "Ingabire Esther",
-    text: "Ensures activities run smoothly and are shaped around the needs of the community.",
-  },
-  {
-    role: "Programmes Manager",
-    focus: "",
-    text: "Coordinates youth-focused initiatives and turns the organisation's mission into practical action.",
-  },
   {
     role: "Deputy Legal Representative",
-    focus: "Patrick Nshimiyimana",
+    focus: "cloude Habimana",
     text: "Leads vocational learning, including shoe making, employability and entrepreneurship pathways.",
   },
   {
-    role: "Communaute & Beneficiaires",
-    focus: "Claude Habimana",
-    text: "Helps ensure safe participation, responsible practice and a trusted environment for young people.",
+    role: "Programmes / communaute & Beneficiaires",
+    focus: "Gatsinzi mourice",
+    text: "Ensures activities run smoothly and are shaped around the needs of the community.",
   },
   {
     role: "Communication / Porte-parole",
     focus: "Aisha Muganga",
+    text: "Coordinates youth-focused initiatives and turns the organisation's mission into practical action.",
+  },
+  {
+    role: "Tresoriere / Treasurer",
+    focus: "Ingabire Esther",
+    text: "Helps ensure safe participation, responsible practice and a trusted environment for young people.",
+  },
+  {
+    role: "Secretaire / Secretary",
+    focus: "Louise Mukaturatsinze",
     text: "Builds strong partnerships and supports the systems that keep projects organised and sustainable.",
   },
-
   {
-    role: "secretaire/Secretary",
-    focus: "Ingabire jean mourice",
-    text: "Supports programmes and helps create welcoming, safe spaces for participation and growth.",
+    role: "Complaint & Ethics Committee",
+    focus: "Ingabire jean marie vianey",
+    text: "Provides guidance and oversight to ensure the organisation's programmes are effective, inclusive and impactful.",
+  },
+  {
+    role: "Advisory council",
+    focus: "Kalinda Theoneste",
+    text: "Provides guidance and oversight to ensure the organisation's programmes are effective, inclusive and impactful.",
   },
 ];
 
@@ -495,7 +499,7 @@ function App() {
               className="mt-10 flex flex-wrap gap-4"
             >
               <a
-                href="{cornerstoneBook}"
+                href={cornerstoneBook}
                 download
                 className="inline-flex items-center gap-2 rounded-full bg-[#fcd116] px-7 py-3.5 font-semibold text-[#173d38] shadow-lg shadow-yellow-900/20 transition hover:bg-[#e7c00f]"
               >
@@ -567,7 +571,7 @@ function App() {
             <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
               <div className="max-w-3xl">
                 <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[#0a3d8f]">Our Team</p>
-                <h2 className="mt-4 text-3xl font-black text-[#0a3d8f] sm:text-4xl">Professionals turning purpose into measurable action.</h2>
+                <h2 className="mt-4 text-3xl font-black text-[#0a3d8f] sm:text-4xl">Meet the team behind the work.</h2>
               </div>
               <p className="max-w-md text-base leading-7 text-slate-600">A focused team structure brings leadership, programme quality, youth protection and strong partnerships together.</p>
             </div>
@@ -792,103 +796,6 @@ function App() {
             </div>
           </motion.div>
         </section>
-
-        {/* <section id="shoe-gallery" className="scroll-mt-20 bg-[#f1f8fc] py-20">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="flex flex-col gap-5 md:flex-row md:items-end md:justify-between">
-              <div className="max-w-3xl">
-                <p className="text-sm font-semibold uppercase tracking-[0.22em] text-[#0a3d8f]">Project gallery</p>
-                <h2 className="mt-4 text-3xl font-black text-[#0a3d8f] sm:text-4xl">See the craft, then take a closer look.</h2>
-                <p className="mt-4 text-lg leading-8 text-slate-600">Browse all {shoeMakingImages.length} moments from the shoe-making project. Every photo is available to download.</p>
-              </div>
-              <p className="text-sm font-semibold text-slate-500">Click the download icon on any photo</p>
-            </div>
-
-            <div className="mt-10 grid gap-4 md:grid-cols-3">
-              {[
-                { number: "01", title: "Material selection", text: "Understanding leather, linings, soles, adhesives and the quality checks behind a reliable finished product." },
-                { number: "02", title: "Pattern to assembly", text: "Moving from measurements and cutting to stitching, shaping, sole attachment and careful finishing." },
-                { number: "03", title: "Craft to enterprise", text: "Building consistency, costing, customer awareness and the confidence to develop a small footwear business." },
-              ].map((stage) => (
-                <div key={stage.number} className="rounded-[1.5rem] border border-[#cfe3ee] bg-white p-6 shadow-sm">
-                  <p className="text-sm font-black tracking-[0.2em] text-[#00a1de]">{stage.number}</p>
-                  <h3 className="mt-4 text-xl font-black text-[#0a3d8f]">{stage.title}</h3>
-                  <p className="mt-3 text-sm leading-7 text-slate-600">{stage.text}</p>
-                </div>
-              ))}
-            </div>
-
-            <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-              {shoeMakingImages.slice(0, showAllShoeImages ? shoeMakingImages.length : 12).map((image, index) => (
-                <motion.article
-                  key={image.fileName}
-                  initial={{ opacity: 0, y: 24 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.12 }}
-                  transition={{ duration: 0.45, delay: (index % 4) * 0.06 }}
-                  className="group overflow-hidden rounded-[1.5rem] border border-[#d5e6f0] bg-white shadow-[0_18px_50px_rgba(10,61,143,0.08)]"
-                >
-                  <div className="relative aspect-[4/3] overflow-hidden bg-slate-100">
-                    <img
-                      src={image.src}
-                      alt={image.title}
-                      loading="lazy"
-                      className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
-                    />
-                    <a
-                      href={image.src}
-                      download={image.fileName}
-                      aria-label={`Download ${image.title}`}
-                      className="absolute right-3 top-3 flex h-10 w-10 items-center justify-center rounded-full bg-white/90 text-[#0a3d8f] shadow-lg backdrop-blur-sm transition hover:bg-[#fcd116]"
-                    >
-                      <Download size={18} />
-                    </a>
-                  </div>
-                  <div className="flex items-center justify-between gap-3 p-4">
-                    <p className="text-sm font-bold text-[#0a3d8f]">{image.title}</p>
-                    <span className="text-xs text-slate-400">JPG</span>
-                  </div>
-                </motion.article>
-              ))}
-            </div>
-
-            {shoeMakingImages.length > 12 && (
-              <button
-                type="button"
-                onClick={() => setShowAllShoeImages((current) => !current)}
-                className="mx-auto mt-10 flex items-center gap-2 rounded-full border-2 border-[#0a3d8f] px-6 py-3 font-semibold text-[#0a3d8f] transition hover:bg-[#0a3d8f] hover:text-white"
-              >
-                {showAllShoeImages ? "Show fewer photos" : `View all ${shoeMakingImages.length} photos`}
-                <ArrowRight size={16} />
-              </button>
-            )}
-          </div>
-        </section>
-
-        <section id="impact" className="bg-[#0a3d8f] py-20 text-white">
-          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
-              <div>
-                <p className="text-sm font-semibold uppercase tracking-[0.22em] text-blue-100">Experience & Track Record</p>
-                <h2 className="mt-4 text-3xl font-black sm:text-4xl">A growing history of youth-focused action and impact.</h2>
-                <p className="mt-6 text-lg leading-8 text-slate-200">
-                  TC has built a strong track record through youth vocational initiatives, school collaboration, prevention work, sport and culture-based engagement, and support for entrepreneurship and community development.
-                </p>
-              </div>
-
-              <div className="grid gap-4">
-                {trackRecord.map((item) => (
-                  <div key={item} className="flex items-start gap-4 rounded-2xl border border-white/10 bg-white/5 p-4">
-                    <div className="mt-1 flex h-10 w-10 items-center justify-center rounded-xl bg-[#fcd116] text-[#0a3d8f]">
-                      <Trophy size={18} />
-                    </div>
-                    <p className="text-base leading-7 text-slate-100">{item}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-          </div>
-        </section> */}
 
         <section id="governance" className="mx-auto max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
           <div className="grid gap-10 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
