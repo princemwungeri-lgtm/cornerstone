@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img" aria-label="The Cornerstone logo">
+  <defs>
+    <linearGradient id="blue" x1="0%" x2="100%" y1="0%" y2="100%">
+      <stop offset="0%" stop-color="#1a90ff"/>
+      <stop offset="100%" stop-color="#0b4dd9"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0%" x2="100%" y1="0%" y2="0%">
+      <stop offset="0%" stop-color="#ffdb4d"/>
+      <stop offset="100%" stop-color="#f3b000"/>
+    </linearGradient>
+  </defs>
+  <rect width="256" height="256" fill="#070707"/>
+  <rect x="20" y="36" width="216" height="22" rx="11" fill="#16b33f"/>
+  <path d="M40 132C65 94 108 63 157 63C204 63 227 94 226 128C226 170 192 196 151 196C103 196 76 168 54 152C44 145 35 143 28 147C24 149 22 153 22 158C22 182 44 194 60 202C83 212 147 234 200 191L201 204C141 226 100 229 69 214C40 200 16 173 16 141C16 120 22 108 35 100C40 96 45 97 40 132Z" fill="url(#blue)"/>
+  <path d="M113 110C150 149 171 176 176 196C180 214 171 231 152 240C123 253 91 247 74 232C58 218 60 186 95 165C111 155 127 136 113 110Z" fill="none" stroke="#f7f7f7" stroke-width="10" stroke-linecap="round"/>
+  <circle cx="127" cy="139" r="47" fill="url(#blue)" stroke="#f7f7f7" stroke-width="8"/>
+  <circle cx="127" cy="139" r="36" fill="#0a9ee8" stroke="#f7f7f7" stroke-width="4"/>
+  <path d="M29 135C62 94 101 68 142 61" fill="none" stroke="url(#gold)" stroke-width="18" stroke-linecap="round"/>
+  <path d="M129 96C162 102 198 125 220 160" fill="none" stroke="url(#gold)" stroke-width="18" stroke-linecap="round"/>
+  <path d="M73 153C77 186 101 201 132 203" fill="none" stroke="#ffffff" stroke-width="6" stroke-linecap="round"/>
+</svg>

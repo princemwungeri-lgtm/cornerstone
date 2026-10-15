@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-label="The Cornerstone logo and slogan">
+  <defs>
+    <linearGradient id="brandBlue" x1="0%" x2="100%" y1="0%" y2="100%">
+      <stop offset="0%" stop-color="#1d8eff"/>
+      <stop offset="100%" stop-color="#0b4dd9"/>
+    </linearGradient>
+    <linearGradient id="brandGold" x1="0%" x2="100%" y1="0%" y2="0%">
+      <stop offset="0%" stop-color="#ffe66a"/>
+      <stop offset="100%" stop-color="#f3b000"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="#020202"/>
+  <rect x="130" y="38" width="980" height="48" rx="10" fill="#1bb64c"/>
+  <g transform="translate(210 125)">
+    <path d="M110 195C151 118 217 67 301 67C398 67 468 126 468 213C468 312 386 373 283 373C220 373 168 347 124 309C99 289 71 284 54 293C43 299 33 310 28 325C22 343 27 358 42 367C88 394 165 420 297 431L300 454C215 471 139 473 77 450C39 435 9 411 3 371C-7 309 33 258 106 229C132 218 145 209 110 195Z" fill="url(#brandBlue)"/>
+    <path d="M210 159C294 193 349 244 370 304C388 356 354 390 304 398C244 408 186 391 149 346C109 298 117 228 171 196C191 184 201 174 210 159Z" fill="none" stroke="#f4f4f4" stroke-width="12" stroke-linecap="round"/>
+    <circle cx="286" cy="233" r="110" fill="url(#brandBlue)" stroke="#f4f4f4" stroke-width="16"/>
+    <circle cx="286" cy="233" r="83" fill="#0c9fe8" stroke="#f4f4f4" stroke-width="8"/>
+    <path d="M72 242C140 151 213 105 299 90" fill="none" stroke="url(#brandGold)" stroke-width="28" stroke-linecap="round"/>
+    <path d="M296 134C347 141 398 170 436 223" fill="none" stroke="url(#brandGold)" stroke-width="28" stroke-linecap="round"/>
+  </g>
+  <text x="90" y="415" font-size="110" font-weight="900" fill="#0a63d8" font-family="Segoe UI, Arial, sans-serif">The</text>
+  <text x="90" y="540" font-size="180" font-weight="900" fill="#0b63d8" font-family="Segoe UI, Arial, sans-serif" letter-spacing="-8">Cornerstone</text>
+  <text x="90" y="585" font-size="58" font-weight="800" fill="#f3f4f6" font-family="Segoe UI, Arial, sans-serif" letter-spacing="4">EDUCATION  CONFIDENCE  CHANGE</text>
+</svg>
