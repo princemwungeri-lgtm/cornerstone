@@ -332,7 +332,7 @@ function App() {
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[80] flex items-center justify-center bg-slate-950/70 p-4"
+            className="fixed inset-0 z-[80] flex  justify-center bg-slate-950/70 p-8 py-12"
             onClick={() => setModalInfo(null)}
           >
             <motion.div
