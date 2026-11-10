@@ -208,13 +208,13 @@ function SocialIcons({ className = "" }) {
   );
 }
 
-function MemberAvatar({ name, size = "h-20 w-20 text-2xl" }) {
+function MemberAvatar({ name, image, size = "h-20 w-20 text-2xl" }) {
   return (
     <div
-      className={`flex ${size} shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-[#00a1de] to-[#0a3d8f] font-black text-white shadow-md`}
+      className={`flex ${size} shrink-0 items-center justify-center overflow-hidden rounded-full bg-gradient-to-br from-[#00a1de] to-[#0a3d8f] font-black text-white shadow-md`}
       aria-hidden="true"
     >
-      {initials(name)}
+      {image ? <img src={image} alt="" className="h-full w-full object-cover" /> : initials(name)}
     </div>
   );
 }
@@ -600,7 +600,7 @@ function App() {
                   >
                     <Wrapper {...(member.href ? { href: member.href } : {})} className="block p-6">
                       <div className="flex items-center justify-between">
-                        <MemberAvatar name={member.name} />
+                        <MemberAvatar name={member.name} image={member.image} />
                         <span className="text-xs font-black tracking-[0.2em] text-[#00a1de]">{member.n}</span>
                       </div>
                       <h4 className="mt-6 text-xl font-black leading-tight text-[#0a3d8f]">{member.name}</h4>
@@ -627,7 +627,7 @@ function App() {
                 <ul className="mt-5 space-y-3">
                   {ethicsCommittee.map((member) => (
                     <li key={member.name} className="flex items-center gap-3">
-                      <MemberAvatar name={member.name} size="h-10 w-10 text-sm" />
+                      <MemberAvatar name={member.name} image={member.image} size="h-10 w-10 text-sm" />
                       <span className="flex-1 font-semibold text-slate-700">{member.name}</span>
                       <span className="text-xs font-black tracking-[0.2em] text-[#00a1de]">{member.n}</span>
                     </li>
@@ -644,7 +644,7 @@ function App() {
                 <ul className="mt-5 space-y-3">
                   {advisoryCouncil.map((member) => (
                     <li key={member.name} className="flex items-center gap-3">
-                      <MemberAvatar name={member.name} size="h-10 w-10 text-sm" />
+                      <MemberAvatar name={member.name} image={member.image} size="h-10 w-10 text-sm" />
                       <span className="flex-1 font-semibold text-slate-700">{member.name}</span>
                       <span className="text-xs font-black tracking-[0.2em] text-[#00a1de]">{member.n}</span>
                     </li>
